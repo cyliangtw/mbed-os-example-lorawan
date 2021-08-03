@@ -38,6 +38,20 @@ add_library(mbed-k64f-sx126x INTERFACE)
 
 target_link_libraries(mbed-k64f-sx126x INTERFACE mbed-k64f)
 
+if("NU_IOT_M2354" IN_LIST MBED_TARGET_LABELS)
+    add_library(mbed-nu-iot-m2354 INTERFACE)
+    add_subdirectory(TARGET_NU_IOT_M2354)
+    target_include_directories(mbed-nu-iot-m2354
+        INTERFACE
+            TARGET_NU_IOT_M2354
+    )
+    target_link_libraries(mbed-nu-iot-m2354
+        INTERFACE
+            mbed-m2354
+            mbed-m2354-tfm
+    )
+endif()
+
 mbed_set_post_build(${APP_TARGET})
 
 option(VERBOSE_BUILD "Have a verbose build process")
