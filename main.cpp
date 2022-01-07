@@ -25,6 +25,13 @@
 #include "trace_helper.h"
 #include "lora_radio_helper.h"
 
+#include "mbed_stats.h"
+
+#define MBED_HEAP_STATS_ENABLED 1
+#if MBED_HEAP_STATS_ENABLED
+    mbed_stats_heap_t heap_stats;
+#endif
+
 using namespace events;
 
 // Max payload size can be LORAMAC_PHY_MAXPAYLOAD.
@@ -92,6 +99,7 @@ static lorawan_app_callbacks_t callbacks;
  */
 int main(void)
 {
+
     // setup tracing
     setup_trace();
 
@@ -185,6 +193,12 @@ static void send_message()
 
     printf("\r\n %d bytes scheduled for transmission \r\n", retcode);
     memset(tx_buffer, 0, sizeof(tx_buffer));
+    
+#if MBED_HEAP_STATS_ENABLED
+    mbed_stats_heap_get(&heap_stats);
+    printf("Current heap: %lu\r\n", heap_stats.current_size);
+    printf("Max heap size: %lu\r\n", heap_stats.max_size);
+#endif
 }
 
 /**
