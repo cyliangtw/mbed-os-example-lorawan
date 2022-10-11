@@ -18,6 +18,7 @@
             "lora.over-the-air-activation": true,
             "lora.duty-cycle-on": true,
             "lora.phy": "US915",
+	    "lora.max-sys-rx-error": 16,
             "lora.fsb-mask": "{0x0000, 0x0000, 0x0000, 0x0000, 0x0000}",
             "lora.appskey": "{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xD0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }",
             "lora.nwkskey": "{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }",
@@ -45,6 +46,8 @@
             "sx1276-lora-driver.ant-switch":     "NC",
             "sx1276-lora-driver.pwr-amp-ctl":    "NC",
             "sx1276-lora-driver.tcxo":           "NC"
+            "target.macros_add": ["MBED_TICKLESS"],
+            "target.tickless-from-us-ticker": false
         },
 
      "NUMAKER_PFM_M487": {

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 #include <stdio.h>
-
+#include "mbed.h"
 #include "lorawan/LoRaWANInterface.h"
 #include "lorawan/system/lorawan_data_structures.h"
 #include "events/EventQueue.h"
@@ -94,12 +94,26 @@ static LoRaWANInterface lorawan(radio);
  */
 static lorawan_app_callbacks_t callbacks;
 
+void test_deep_sleep()
+{
+    // Deep sleep for 1 second
+    printf("Deep sleep allowed: %i\r\n", sleep_manager_can_deep_sleep());
+    ThisThread::sleep_for(1000);
+
+    // Lock deep sleep
+    printf("Locking deep sleep\r\n");
+    sleep_manager_lock_deep_sleep();
+
+    // Sleep for 1 second
+    printf("Deep sleep allowed: %i\r\n", sleep_manager_can_deep_sleep());
+    ThisThread::sleep_for(1000);
+}
+
 /**
  * Entry point for application
  */
 int main(void)
 {
-
     // setup tracing
     setup_trace();
 
@@ -199,6 +213,7 @@ static void send_message()
     printf("Current heap: %lu\r\n", heap_stats.current_size);
     printf("Max heap size: %lu\r\n", heap_stats.max_size);
 #endif
+    printf("Deep sleep allowed: %i\r\n", sleep_manager_can_deep_sleep());
 }
 
 /**
