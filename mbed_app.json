@@ -45,7 +45,7 @@
             "sx1276-lora-driver.rxctl":          "NC",
             "sx1276-lora-driver.ant-switch":     "NC",
             "sx1276-lora-driver.pwr-amp-ctl":    "NC",
-            "sx1276-lora-driver.tcxo":           "NC"
+            "sx1276-lora-driver.tcxo":           "NC",
             "target.macros_add": ["MBED_TICKLESS"],
             "target.tickless-from-us-ticker": false
         },
