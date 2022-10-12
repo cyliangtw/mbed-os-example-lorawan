@@ -92,6 +92,9 @@
             "sx1272-lora-driver.ant-switch":     "NC",
             "sx1272-lora-driver.pwr-amp-ctl":    "NC",
             "sx1272-lora-driver.tcxo":           "NC"
+            "target.macros_add": ["MBED_TICKLESS", "MBED_SLEEP_TRACING_ENABLED"],
+            "target.tickless-from-us-ticker": false,
+            "platform.cpu-stats-enabled": true
         },
         
         "NU_IOT_M2354": {

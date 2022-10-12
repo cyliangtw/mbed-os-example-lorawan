@@ -31,6 +31,9 @@
 #if MBED_HEAP_STATS_ENABLED
     mbed_stats_heap_t heap_stats;
 #endif
+#if defined(MBED_CPU_STATS_ENABLED)
+    mbed_stats_cpu_t cpu_stats;
+#endif
 
 using namespace events;
 
@@ -163,7 +166,7 @@ int main(void)
 
     // make your event queue dispatching events forever
     ev_queue.dispatch_forever();
-
+    printf(" After dispatchevetn queue \n");
     return 0;
 }
 
@@ -212,6 +215,11 @@ static void send_message()
     mbed_stats_heap_get(&heap_stats);
     printf("Current heap: %lu\r\n", heap_stats.current_size);
     printf("Max heap size: %lu\r\n", heap_stats.max_size);
+#endif
+#if defined(MBED_CPU_STATS_ENABLED)
+    mbed_stats_cpu_get(&cpu_stats);
+    printf("Sleep time:%llu ", cpu_stats.sleep_time/1000);
+    printf("Deep Sleep time:%llu \n", cpu_stats.deep_sleep_time/1000);
 #endif
     printf("Deep sleep allowed: %i\r\n", sleep_manager_can_deep_sleep());
 }
